@@ -8,27 +8,11 @@ async function homeController($scope, storage, homeService) {
       $scope.storage.resetSessionToken();
       $scope.$emit("closeSesion");
     };
-
-    
-    
-    let toReservations = (rawReservations) => {
-        return rawReservations.map( (rawRes) => {
-          return {
-            bookingId: rawRes.bookingId,
-            client: rawRes.client,
-            bookingTime: rawRes.bookingTime != undefined
-              ? new Date(rawRes.bookingTime).toLocaleString()
-              : undefined,
-            streetAddress: rawRes.streetAddress,
-            bookingPrice: rawRes.bookingPrice
-          }
-        });  
-    }
       
     const sessionToken = await storage.getSessionToken()
-    homeService.getList(sessionToken).then((reservations) => {
+    homeService.getList(sessionToken).then((res) => {
 
-        $scope.file = toReservations(reservations);
+        $scope.file = res;
         console.log($scope.file)
         $scope.current_grid = 1;
         $scope.data_limit = 10;

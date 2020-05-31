@@ -1,14 +1,18 @@
-function toReservations(rawReservations) {
-  return rawReservations.map(function (rawRes) {
+function mapper(rawReservations) {
+  return rawReservations.map(function (Res) {
     return {
-      bookingId: rawRes.bookingId,
-      client: rawRes.tutenUserClient.firstName
-        + ' ' + rawRes.tutenUserClient.lastName,
-      bookingTime: rawRes.bookingTime != undefined
-        ? new Date(rawRes.bookingTime).toLocaleString()
+      bookingId: Res.bookingId,
+
+      client: Res.tutenUserClient.firstName
+        + ' ' + Res.tutenUserClient.lastName,
+
+      bookingTime: Res.bookingTime != undefined
+        ? new Date(Res.bookingTime).toLocaleString()
         : undefined,
-      streetAddress: rawRes.locationId.streetAddress,
-      bookingPrice: rawRes.bookingPrice
+
+      streetAddress: Res.locationId.streetAddress,
+
+      bookingPrice: Res.bookingPrice
     }
   });  
 }
@@ -17,7 +21,7 @@ function homeService($http) {
 
   return {
 
-    getList: function (sessionToken) {
+    getList: (sessionToken) => {
       var headers = {
         headers: {
           adminemail: 'testapis@tuten.cl',
@@ -26,9 +30,9 @@ function homeService($http) {
         }
       };
       let url = $http.get('https://dev.tuten.cl/TutenREST/rest/user/contacto%40tuten.cl/bookings?current=true', headers);
-      return new Promise(function (resolve) {
-        url.then(function (response) {
-          resolve(toReservations(response.data));
+      return new Promise( (resolve) => {
+        url.then( (response) => {
+          resolve(mapper(response.data));
         });
       });
     },
