@@ -1,0 +1,72 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+<body>
+<div >
+    <div class="container">
+        <br/>
+            <h3 align="center">Tabla de contenido</a></h3>
+        <br/>
+        <div class="row">
+            <div class="col-sm-2 pull-left">
+                <label>Tamaño de pagina:</label>
+                <select ng-model="data_limit" class="form-control">
+                    <option>10</option>
+                    <option>20</option>
+                    <option>50</option>
+                    <option>100</option>
+                </select>
+            </div>
+            <div class="col-sm-6 pull-right">
+                <label>Buscar:</label>
+                <input type="text" ng-model="search" ng-change="filter()" placeholder="Search" class="form-control" />
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-md-12" >
+                <table class="table table-striped ">
+                    <thead>
+                        <th>BookingId&nbsp;<a ng-click="sort_with('name');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                        <th>Cliente&nbsp;<a ng-click="sort_with('gender');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                        <th>Fecha de creación&nbsp;<a ng-click="sort_with('age');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                        <th>Dirección&nbsp;<a ng-click="sort_with('email');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                        <th>Precio&nbsp;<a ng-click="sort_with('phone');"><i class="glyphicon glyphicon-sort"></i></a></th>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="data in searched = (file | filter:search | orderBy : base :reverse)| limitTo:data_limit">
+                            <td>{{data.bookingId}}</td>
+                            <td>{{data.client}}</td>
+                            <td>{{data.bookingTime}}</td>
+                            <td>{{data.streetAddress}}</td>
+                            <td>{{data.bookingPrice}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-12" ng-show="filter_data == 0">
+                <div class="col-md-12">
+                    <h4>No se encontraron</h4>
+                </div>
+            </div>
+        <div class="col-md-12">
+            <div class="col-md-6 pull-left">
+                <h5>Mostrando {{ searched.length }} de {{ entire_user}} entradas</h5>
+            </div>
+            <div class="col-md-6" >
+                <div pagination="" page="current_grid" on-select-page="page_position(page)" boundary-links="true" total-items="filter_data" items-per-page="data_limit" class="pagination-small pull-right" previous-text="&laquo;" next-text="&raquo;"></div>
+            </div>
+        </div>
+    </div>
+    <button ng-click="close_sesion()"
+        class="btn btn-primary btn-block">
+        Cerrar Sesión
+    </button>
+</div>
+</div>
+</script>
+</body>
+</html>

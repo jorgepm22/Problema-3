@@ -1,0 +1,21 @@
+{
+  "name": "booking",
+  "dependencies": {
+    "angular": "^1.7.9",
+    "angular-material-data-table": "^0.10.10",
+    "angular-ui-bootstrap": "^2.5.6",
+    "bootstrap": "^4.4.1",
+    "jquery": "^3.4.1",
+    "popper.js": "^1.16.1"
+  },
+  "devDependencies": {
+    "cpx": "^1.5.0",
+    "http-server": "^0.11.1"
+  },
+  "scripts": {
+    "postinstall": "npm run copy-libs",
+    "copy-libs": "cpx \"node_modules/{angular,jquery/dist,popper.js/dist,bootstrap/dist,angular-ui-bootstrap/dist}/**/*\" app/lib -C",
+    "prestart": "npm install",
+    "start": "http-server -a localhost -p 8010 -c-1 ./app"
+  }
+}

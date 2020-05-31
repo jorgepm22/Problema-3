@@ -1,0 +1,54 @@
+<div class="card">
+  <div class="card-header">
+    <h2>Inicio de Sesión</h2>
+  </div>
+  <div class="card-body">
+    <form name="form" ng-submit="loginRequest()">
+      <div class="row p-1">
+        <p class="card-text">Ingresa tus datos.</p>
+        <input
+          name="email"
+          type="email"
+          class="form-control m-3"
+          placeholder="Correo electrónico"
+          ng-model="email"
+          ng-change="onChange()"
+          required
+        >
+        <input
+          name="password"
+          type="password"
+          class="form-control m-3"
+          placeholder="Contraseña"
+          ng-model="password"
+          ng-change="onChange()"
+          required
+        >
+        <p
+          ng-if="failedLastAttempt"
+          class="wrong-credentials-error"
+        >
+          Datos inválidos
+        </p>
+      </div>
+      <div class="row justify-content-center p-1">
+        <div class="col-8">
+          <button
+            type="submit"
+            class="btn btn-primary btn-block"
+            ng-disabled="form.$invalid || requestAwait"
+          >
+            Iniciar sesión
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<style scoped>
+h2 {text-align: center;}
+.wrong-credentials-error,
+.wrong-format-error {
+  color: red;
+}
+</style>
