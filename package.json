@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "cpx": ">=1.5.0",
-    "http-server": ">=0.10.1"
+    "http-server": ">=14.1.1"
   },
   "scripts": {
     "postinstall": "npm run copy-libs",
